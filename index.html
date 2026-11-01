@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>등산여지도 미리보기</title>
+<style>
+:root{--g:#2E7D5B;--gd:#1C4F3A;--gm:#5E8F79;--gt:#EAF4EE;--a:#E8A33D}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:#DCE8DF;font-family:-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;color:var(--gd);display:flex;flex-direction:column;align-items:center;padding:24px 16px}
+h1{font-size:18px;margin:0 0 4px}.sub{color:var(--gm);font-size:13px;margin:0 0 16px;text-align:center}
+.phone{width:390px;height:844px;max-height:calc(100vh - 120px);background:#000;border-radius:44px;padding:12px;box-shadow:0 20px 60px rgba(28,79,58,.35);position:relative}
+.phone iframe{width:100%;height:100%;border:0;border-radius:34px;background:#fff}
+.notch{position:absolute;top:12px;left:50%;transform:translateX(-50%);width:120px;height:28px;background:#000;border-radius:0 0 18px 18px;z-index:2}
+.tips{max-width:560px;margin-top:18px;background:#fff;border-radius:14px;padding:14px 16px;font-size:13px;line-height:1.6;border:1px solid #CFE3D8}
+.tips b{color:var(--g)}
+@media (max-width:430px){.phone{width:100%;height:calc(100vh - 40px);border-radius:0;padding:0}.phone iframe{border-radius:0}.notch{display:none}body{padding:0}h1,.sub,.tips{display:none}}
+</style>
+</head>
+<body>
+<h1>등산여지도 — PC 미리보기 (최종 · 전국 타일·코스 적용)</h1>
+<p class="sub">실제 앱과 같은 코드가 모바일 화면 크기로 동작합니다 · 브라우저에서 위치 권한을 허용하면 PC 위치 기준으로 표시됩니다</p>
+<div class="phone"><div class="notch"></div><iframe src="app/index.html" allow="geolocation; camera" title="등산여지도"></iframe></div>
+<div class="tips">
+<b>테스트 순서</b><br>
+1. 닉네임 입력 → 시작 → [위치 권한 허용하기] (브라우저 팝업 허용)<br>
+2. 홈: 반경·해발 필터, 거리순/난이도순<br>
+3. 산 찾기: "금정산", "천왕봉" 검색 / 지역 버튼<br>
+4. 산 상세: 지도에 <b>코스 번호 선</b> 여러 개 → 선 또는 카드 탭 → [내비 안내] / [이 코스로 기록 시작] (확인 창)<br>
+5. 기록: [시작] → [휴식]/[등산] → [하산 시작] → [화면 잠금] → [종료] → 결과·요약 카드·칼로리 환산<br>
+6. 산 찾기: "지리산" 검색 → <b>산군 묶음</b> / [100대 명산] 탭 / ★ 즐겨찾기<br>
+7. 산 상세: 날씨·일출몰, [오프라인 지도 저장], [현장 정보] 탭, 🚌 대중교통, 🔗 코스 공유<br>
+8. 친구: [동행] 위치 공유, [모임] 등록·참여 / 마이: 안전 연락처, 다크 모드·큰 글씨, 📊 리포트 / 상단 <b>SOS</b><br>
+<span style="color:#5E8F79">PC에서는 GPS가 움직이지 않아 거리·칼로리는 0에 가깝습니다. 백그라운드 기록·기압계·진동·내비 앱 열기·연락처는 휴대폰 앱에서만 동작합니다. 지도 데이터는 산을 처음 열 때 인터넷에서 받아옵니다(10~30초).</span>
+</div>
+</body>
+</html>

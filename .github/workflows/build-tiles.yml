@@ -1,0 +1,48 @@
+name: build-tiles
+on:
+  workflow_dispatch:
+    inputs:
+      max_tiles:
+        description: "이번 실행에서 만들 타일 수 (0=전부)"
+        required: false
+        default: "0"
+  schedule:
+    - cron: "0 18 1 * *"
+permissions:
+  contents: write
+concurrency:
+  group: tiles
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: git identity
+        run: |
+          git config user.name "tile-bot"
+          git config user.email "bot@users.noreply.github.com"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: deps
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq osmium-tool
+          npm i pngjs@7 --no-audit --no-fund
+      - name: build tiles
+        env:
+          MAX_TILES: ${{ github.event.inputs.max_tiles || '0' }}
+        run: node --max-old-space-size=6144 scripts/build-tiles.js
+      - name: commit (history squash — 데이터 리포 용량 유지)
+        if: always()
+        run: |
+          rm -rf data/mountains .tmp
+          git checkout --orphan squashed
+          git add -A
+          git commit -qm "tiles: $(date -u +%F) $(ls data/tiles 2>/dev/null | wc -l) tiles (squashed)"
+          git branch -D main
+          git branch -m main
+          git push -f origin main
